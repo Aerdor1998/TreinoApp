@@ -328,39 +328,226 @@
     }
     .sets-tracker {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-bottom: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
     }
-    .set-input {
+    
+    .set-card {
       background: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 15px;
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px;
+      position: relative;
+      transition: all 0.3s ease;
+      overflow: hidden;
     }
-    .set-label {
-      font-size: 0.8em;
+    
+    .set-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-main);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .set-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .set-card.completed {
+      border-color: var(--color-success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .set-card.completed::before {
+      background: var(--color-success);
+      transform: scaleX(1);
+    }
+    
+    .set-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .set-number {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .set-number .set-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gradient-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+    
+    .set-status {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .set-status.empty {
+      background: rgba(156, 163, 175, 0.2);
+      color: var(--text-muted);
+    }
+    
+    .set-status.filled {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--color-primary);
+    }
+    
+    .set-status.completed {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--color-success);
+    }
+    
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .input-container {
+      position: relative;
+    }
+    
+    .input-label {
+      font-size: 0.75em;
+      font-weight: 600;
       color: var(--text-muted);
       margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .input-group {
-      display: flex;
-      gap: 10px;
-    }
+    
     .input-field {
-      flex: 1;
+      width: 100%;
       background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 10px;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 12px;
       color: var(--text-primary);
-      font-size: 0.9em;
+      font-size: 1.1em;
+      font-weight: 600;
       text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
     }
+    
     .input-field:focus {
       outline: none;
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      transform: scale(1.02);
+    }
+    
+    .input-field:valid:not(:placeholder-shown) {
+      border-color: var(--color-success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .input-unit {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8em;
+      color: var(--text-muted);
+      font-weight: 500;
+      pointer-events: none;
+    }
+    
+    .set-controls {
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .set-volume {
+      font-size: 0.8em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .set-volume strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    .quick-fill {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .quick-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.7em;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .quick-btn:hover {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+    
+    .previous-set {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      font-size: 0.8em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .previous-set .copy-previous {
+      background: none;
+      border: none;
+      color: var(--color-primary);
+      cursor: pointer;
+      font-size: 0.7em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+    
+    .previous-set .copy-previous:hover {
+      background: rgba(139, 92, 246, 0.1);
     }
 
     /* Cronómetro */
@@ -821,6 +1008,38 @@
       font-weight: 600;
     }
 
+    /* Progresso do Exercício */
+    .exercise-progress {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .progress-text {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+    }
+    
+    .progress-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .progress-percentage {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
     /* Estado de carregamento */
     .loading {
       opacity: 0.6;
@@ -844,6 +1063,145 @@
     @keyframes spin {
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
+
+    /* Animações para as séries */
+    .set-card.completing {
+      animation: completeSet 0.6s ease-in-out;
+    }
+
+    @keyframes completeSet {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); border-color: var(--color-success); }
+      100% { transform: scale(1); }
+    }
+
+    .volume-celebration {
+      animation: celebrateVolume 0.8s ease-in-out;
+    }
+
+    @keyframes celebrateVolume {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1) rotate(-2deg); }
+      75% { transform: scale(1.1) rotate(2deg); }
+    }
+
+    /* Resumo do Treino */
+    .workout-summary {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+    }
+    
+    .summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .summary-header h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    
+    .summary-time {
+      font-family: 'Courier New', monospace;
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: rgba(139, 92, 246, 0.1);
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+    
+    .summary-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .summary-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    
+    .summary-stat-item:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+    }
+    
+    .summary-stat-item .stat-icon {
+      font-size: 1.5em;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient-main);
+      border-radius: 50%;
+      color: white;
+    }
+    
+    .stat-info {
+      flex: 1;
+    }
+    
+    .summary-stat-item .stat-value {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    
+    .summary-stat-item .stat-label {
+      font-size: 0.8em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+      
+      /* Responsive para resumo */
+      @media (max-width: 768px) {
+        .workout-summary {
+          position: static;
+          margin-bottom: 20px;
+          padding: 20px;
+        }
+        
+        .summary-stats-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        
+        .summary-stat-item {
+          padding: 10px;
+        }
+        
+        .summary-stat-item .stat-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 1.3em;
+        }
+      }
 
     /* Barra inferior de navegação */
     .bottom-nav {
@@ -1031,11 +1389,30 @@
       
       .sets-tracker {
         grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      
+      .set-card {
+        padding: 16px;
+      }
+      
+      .input-row {
         gap: 10px;
       }
       
-      .set-input {
-        padding: 12px;
+      .input-field {
+        padding: 12px 10px;
+        font-size: 1em;
+      }
+      
+      .set-controls {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+      }
+      
+      .quick-fill {
+        justify-content: center;
       }
       
       .input-group {
@@ -1102,6 +1479,43 @@
       .section-title {
         font-size: 1.1em;
       }
+      
+      .sets-tracker {
+        grid-template-columns: 1fr;
+      }
+      
+      .set-card {
+        padding: 14px;
+      }
+      
+      .set-header {
+        margin-bottom: 12px;
+      }
+      
+      .set-number {
+        font-size: 1em;
+      }
+      
+      .set-number .set-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8em;
+      }
+      
+      .input-field {
+        padding: 12px 8px;
+        font-size: 1em;
+      }
+      
+      .quick-btn {
+        padding: 6px 10px;
+        font-size: 0.65em;
+      }
+      
+      .previous-set {
+        padding: 6px 10px;
+        font-size: 0.75em;
+      }
     }
     
     @media (orientation: landscape) and (max-height: 600px) {
@@ -1120,6 +1534,19 @@
       .timer-display {
         font-size: 2em;
         margin-bottom: 10px;
+      }
+      
+      .sets-tracker {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      
+      .set-card {
+        padding: 12px;
+      }
+      
+      .exercise-details {
+        max-height: 300px;
+        overflow-y: auto;
       }
     }
   </style>
@@ -1504,6 +1931,11 @@
       
       // Verificar auto-save
       checkAutosave();
+      
+      // Atualizar resumo do treino se houver treino ativo
+      if (currentWorkoutType) {
+        setInterval(updateWorkoutSummary, 1000);
+      }
 
       // Service worker registration somente se protocolo suportar
       if ('serviceWorker' in navigator) {
@@ -1734,6 +2166,42 @@
       const template = workoutTemplates[workoutType];
       const container = document.getElementById('activeWorkout');
       let html = `
+        <div class="workout-summary" id="workout-summary-${workoutType}">
+          <div class="summary-header">
+            <h3>📊 Resumo do Treino</h3>
+            <div class="summary-time" id="workout-duration">00:00</div>
+          </div>
+          <div class="summary-stats-grid">
+            <div class="summary-stat-item">
+              <div class="stat-icon">💪</div>
+              <div class="stat-info">
+                <div class="stat-value" id="total-exercises">0/${template.exercises.length}</div>
+                <div class="stat-label">Exercícios</div>
+              </div>
+            </div>
+            <div class="summary-stat-item">
+              <div class="stat-icon">🏋️</div>
+              <div class="stat-info">
+                <div class="stat-value" id="total-sets">0</div>
+                <div class="stat-label">Séries</div>
+              </div>
+            </div>
+            <div class="summary-stat-item">
+              <div class="stat-icon">⚖️</div>
+              <div class="stat-info">
+                <div class="stat-value" id="total-volume">0 kg</div>
+                <div class="stat-label">Volume</div>
+              </div>
+            </div>
+            <div class="summary-stat-item">
+              <div class="stat-icon">🎯</div>
+              <div class="stat-info">
+                <div class="stat-value" id="completion-rate">0%</div>
+                <div class="stat-label">Conclusão</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="exercise-section fade-in">
           <div class="section-header">
             <div class="section-title">${template.emoji} ${template.name}</div>
@@ -1755,11 +2223,20 @@
               <div class="exercise-check" onclick="toggleExercise(event, ${index})">✓</div>
             </div>
             <div class="exercise-details" id="details-${index}">
-              <div class="sets-tracker">
+              <div class="exercise-progress" id="exercise-progress-${index}">
+                <div class="progress-header">
+                  <span class="progress-text">Progresso: <strong>0/${exercise.sets} séries</strong></span>
+                  <span class="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" id="exercise-fill-${index}" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="sets-tracker" id="sets-tracker-${index}">
                 ${generateSetsTracker(exercise, index)}
               </div>
-              <div style="background: var(--bg-primary); padding:12px; border-radius:8px; margin-top:10px; font-size:0.85em; color: var(--text-muted);">
-                💡 ${exercise.notes}
+              <div style="background: var(--bg-primary); padding:15px; border-radius:12px; margin-top:15px; font-size:0.85em; color: var(--text-muted); border-left: 4px solid var(--color-primary);">
+                💡 <strong style="color: var(--text-secondary);">Dica:</strong> ${exercise.notes}
               </div>
             </div>
           </div>
@@ -1772,18 +2249,237 @@
 
     function generateSetsTracker(exercise, exerciseIndex) {
       let html = '';
+      const previousData = getPreviousWorkoutData(exercise.name);
+      
       for (let i = 1; i <= exercise.sets; i++) {
+        const prevSet = previousData && previousData.sets && previousData.sets[i-1];
+        const setId = `${exerciseIndex}-${i}`;
+        
         html += `
-          <div class="set-input">
-            <div class="set-label">Série ${i}</div>
-            <div class="input-group">
-              <input type="number" placeholder="Peso" class="input-field" id="weight-${exerciseIndex}-${i}" min="0" step="0.5" />
-              <input type="number" placeholder="Reps" class="input-field" id="reps-${exerciseIndex}-${i}" min="1" max="50" />
+          <div class="set-card" id="set-card-${setId}">
+            <div class="set-header">
+              <div class="set-number">
+                <div class="set-icon">${i}</div>
+                <span>Série ${i}</span>
+              </div>
+              <div class="set-status empty" id="status-${setId}">Vazia</div>
             </div>
+            
+            <div class="input-row">
+              <div class="input-container">
+                <div class="input-label">💪 Peso</div>
+                <input type="number" 
+                       class="input-field" 
+                       id="weight-${setId}" 
+                       placeholder="0" 
+                       min="0" 
+                       step="0.5" 
+                       oninput="updateSetStatus('${setId}')" />
+                <div class="input-unit">kg</div>
+              </div>
+              
+              <div class="input-container">
+                <div class="input-label">🔥 Reps</div>
+                <input type="number" 
+                       class="input-field" 
+                       id="reps-${setId}" 
+                       placeholder="0" 
+                       min="1" 
+                       max="50" 
+                       oninput="updateSetStatus('${setId}')" />
+                <div class="input-unit">x</div>
+              </div>
+            </div>
+            
+            <div class="set-controls">
+              <div class="set-volume" id="volume-${setId}">
+                <span>📊 Volume: </span><strong>0 kg</strong>
+              </div>
+              
+              <div class="quick-fill">
+                <button class="quick-btn" onclick="quickFillSet('${setId}', '${exercise.reps}')">📋 ${exercise.reps}</button>
+                <button class="quick-btn" onclick="clearSet('${setId}')">🗑️ Limpar</button>
+                ${prevSet ? `<button class="quick-btn" onclick="copyPrevious('${setId}', ${prevSet.weight}, ${prevSet.reps})">⬅️ Anterior</button>` : ''}
+              </div>
+            </div>
+            
+            ${prevSet ? `
+              <div class="previous-set">
+                <span>📈 Anterior: ${prevSet.weight}kg × ${prevSet.reps}</span>
+                <button class="copy-previous" onclick="copyPrevious('${setId}', ${prevSet.weight}, ${prevSet.reps})">
+                  Copiar
+                </button>
+              </div>
+            ` : ''}
           </div>
         `;
       }
       return html;
+    }
+    
+    function updateSetStatus(setId) {
+      const weightInput = document.getElementById(`weight-${setId}`);
+      const repsInput = document.getElementById(`reps-${setId}`);
+      const statusElement = document.getElementById(`status-${setId}`);
+      const volumeElement = document.getElementById(`volume-${setId}`);
+      const setCard = document.getElementById(`set-card-${setId}`);
+      
+      const weight = parseFloat(weightInput.value) || 0;
+      const reps = parseInt(repsInput.value) || 0;
+      const volume = weight * reps;
+      
+      // Atualizar volume com animação se aumentou significativamente
+      if (volumeElement) {
+        const previousVolume = parseFloat(volumeElement.querySelector('strong')?.textContent) || 0;
+        volumeElement.innerHTML = `<span>📊 Volume: </span><strong>${volume.toFixed(1)} kg</strong>`;
+        
+        if (volume > previousVolume + 10) {
+          volumeElement.classList.add('volume-celebration');
+          setTimeout(() => volumeElement.classList.remove('volume-celebration'), 800);
+        }
+      }
+      
+      // Atualizar status com animações
+      const wasEmpty = statusElement.textContent === 'Vazia';
+      
+      if (weight > 0 && reps > 0) {
+        statusElement.textContent = 'Preenchida';
+        statusElement.className = 'set-status filled';
+        setCard.classList.remove('completed');
+        
+        if (wasEmpty) {
+          setCard.style.transform = 'scale(1.02)';
+          setTimeout(() => {
+            setCard.style.transform = '';
+          }, 200);
+        }
+      } else if (weight > 0 || reps > 0) {
+        statusElement.textContent = 'Parcial';
+        statusElement.className = 'set-status filled';
+        setCard.classList.remove('completed');
+      } else {
+        statusElement.textContent = 'Vazia';
+        statusElement.className = 'set-status empty';
+        setCard.classList.remove('completed');
+      }
+      
+      // Atualizar progresso do exercício
+      updateExerciseProgress(setId);
+    }
+    
+    function updateExerciseProgress(setId) {
+      const exerciseIndex = setId.split('-')[0];
+      const exerciseProgressElement = document.getElementById(`exercise-progress-${exerciseIndex}`);
+      
+      if (!exerciseProgressElement) return;
+      
+      // Contar séries preenchidas
+      const allSets = document.querySelectorAll(`[id^="set-card-${exerciseIndex}-"]`);
+      const filledSets = Array.from(allSets).filter(setCard => {
+        const setCardId = setCard.id.replace('set-card-', '');
+        const weight = parseFloat(document.getElementById(`weight-${setCardId}`).value) || 0;
+        const reps = parseInt(document.getElementById(`reps-${setCardId}`).value) || 0;
+        return weight > 0 && reps > 0;
+      });
+      
+      const totalSets = allSets.length;
+      const completedSets = filledSets.length;
+      const percentage = Math.round((completedSets / totalSets) * 100);
+      
+      // Atualizar elementos do progresso
+      const progressText = exerciseProgressElement.querySelector('.progress-text');
+      const progressPercentage = exerciseProgressElement.querySelector('.progress-percentage');
+      const progressFill = document.getElementById(`exercise-fill-${exerciseIndex}`);
+      
+      if (progressText) {
+        progressText.innerHTML = `Progresso: <strong>${completedSets}/${totalSets} séries</strong>`;
+      }
+      
+      if (progressPercentage) {
+        progressPercentage.textContent = `${percentage}%`;
+      }
+      
+      if (progressFill) {
+        progressFill.style.width = `${percentage}%`;
+        
+        // Mudar cor baseada no progresso
+        if (percentage === 100) {
+          progressFill.style.background = 'var(--color-success)';
+          exerciseProgressElement.style.borderColor = 'var(--color-success)';
+        } else if (percentage >= 50) {
+          progressFill.style.background = 'var(--gradient-main)';
+          exerciseProgressElement.style.borderColor = 'var(--color-primary)';
+        } else {
+          progressFill.style.background = 'var(--gradient-main)';
+          exerciseProgressElement.style.borderColor = 'var(--border-color)';
+        }
+      }
+      
+      // Celebração quando completa 100%
+      if (percentage === 100 && completedSets === totalSets) {
+        setTimeout(() => {
+          showNotification(`🎉 Exercício completo! ${completedSets} séries finalizadas!`);
+        }, 300);
+      }
+    }
+    
+    function quickFillSet(setId, repsRange) {
+      const repsInput = document.getElementById(`reps-${setId}`);
+      
+      // Extrair número do range (ex: '6-8' -> 7, '10-12' -> 11)
+      if (repsRange.includes('-')) {
+        const [min, max] = repsRange.split('-').map(n => parseInt(n));
+        const midPoint = Math.floor((min + max) / 2);
+        repsInput.value = midPoint;
+      } else {
+        repsInput.value = parseInt(repsRange) || 10;
+      }
+      
+      updateSetStatus(setId);
+      
+      // Foco no campo de peso se estiver vazio
+      const weightInput = document.getElementById(`weight-${setId}`);
+      if (!weightInput.value) {
+        weightInput.focus();
+      }
+    }
+    
+    function clearSet(setId) {
+      const weightInput = document.getElementById(`weight-${setId}`);
+      const repsInput = document.getElementById(`reps-${setId}`);
+      
+      weightInput.value = '';
+      repsInput.value = '';
+      
+      updateSetStatus(setId);
+    }
+    
+    function copyPrevious(setId, weight, reps) {
+      const weightInput = document.getElementById(`weight-${setId}`);
+      const repsInput = document.getElementById(`reps-${setId}`);
+      
+      weightInput.value = weight;
+      repsInput.value = reps;
+      
+      updateSetStatus(setId);
+      
+      showNotification(`📋 Série anterior copiada: ${weight}kg × ${reps}`);
+    }
+    
+    function getPreviousWorkoutData(exerciseName) {
+      const history = getStoredData('history') || [];
+      
+      // Procurar nos últimos 5 treinos por este exercício
+      for (const workout of history.slice(0, 5)) {
+        if (workout.exercises) {
+          const exercise = workout.exercises.find(ex => ex && ex.name === exerciseName && ex.sets && ex.sets.length > 0);
+          if (exercise) {
+            return exercise;
+          }
+        }
+      }
+      
+      return null;
     }
 
     function toggleExerciseDetails(index) {
@@ -1806,10 +2502,20 @@
         completed: item.classList.contains('completed')
       };
       for (let i = 1; i <= exerciseTemplate.sets; i++) {
-        const weight = document.getElementById(`weight-${index}-${i}`).value;
-        const reps = document.getElementById(`reps-${index}-${i}`).value;
+        const setId = `${index}-${i}`;
+        const weight = document.getElementById(`weight-${setId}`).value;
+        const reps = document.getElementById(`reps-${setId}`).value;
         if (weight > 0 && reps > 0) {
           exerciseData.sets.push({ weight: parseFloat(weight), reps: parseInt(reps) });
+          
+          // Marcar série como completada visualmente
+          const setCard = document.getElementById(`set-card-${setId}`);
+          const statusElement = document.getElementById(`status-${setId}`);
+          if (setCard && statusElement) {
+            setCard.classList.add('completed');
+            statusElement.textContent = 'Concluída';
+            statusElement.className = 'set-status completed';
+          }
         }
       }
       currentWorkoutData.exercises[index] = exerciseData;
@@ -1832,9 +2538,83 @@
       const percent = Math.round((completed / total) * 100);
       document.getElementById('weeklyProgress').textContent = `${percent}%`;
     }
+    
     function updateSessionStats() {
       const completed = document.querySelectorAll('.exercise-item.completed').length;
       document.getElementById('exercisesCompleted').textContent = completed;
+      
+      // Atualizar resumo do treino em tempo real
+      updateWorkoutSummary();
+    }
+    
+    function updateWorkoutSummary() {
+      if (!currentWorkoutType) return;
+      
+      // Contar exercícios completados
+      const completedExercises = document.querySelectorAll('.exercise-item.completed').length;
+      const totalExercises = workoutTemplates[currentWorkoutType].exercises.length;
+      
+      // Contar séries completadas e calcular volume total
+      let totalSets = 0;
+      let totalVolume = 0;
+      
+      workoutTemplates[currentWorkoutType].exercises.forEach((exercise, index) => {
+        for (let i = 1; i <= exercise.sets; i++) {
+          const setId = `${index}-${i}`;
+          const weightInput = document.getElementById(`weight-${setId}`);
+          const repsInput = document.getElementById(`reps-${setId}`);
+          
+          if (weightInput && repsInput) {
+            const weight = parseFloat(weightInput.value) || 0;
+            const reps = parseInt(repsInput.value) || 0;
+            
+            if (weight > 0 && reps > 0) {
+              totalSets++;
+              totalVolume += weight * reps;
+            }
+          }
+        }
+      });
+      
+      const completionRate = Math.round((completedExercises / totalExercises) * 100);
+      
+      // Atualizar elementos do resumo
+      const totalExercisesElement = document.getElementById('total-exercises');
+      const totalSetsElement = document.getElementById('total-sets');
+      const totalVolumeElement = document.getElementById('total-volume');
+      const completionRateElement = document.getElementById('completion-rate');
+      
+      if (totalExercisesElement) {
+        totalExercisesElement.textContent = `${completedExercises}/${totalExercises}`;
+      }
+      
+      if (totalSetsElement) {
+        totalSetsElement.textContent = totalSets;
+      }
+      
+      if (totalVolumeElement) {
+        totalVolumeElement.textContent = `${totalVolume.toFixed(0)} kg`;
+      }
+      
+      if (completionRateElement) {
+        completionRateElement.textContent = `${completionRate}%`;
+      }
+      
+      // Atualizar duração
+      updateWorkoutDuration();
+    }
+    
+    function updateWorkoutDuration() {
+      if (!sessionStartTime) return;
+      
+      const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+      const durationElement = document.getElementById('workout-duration');
+      
+      if (durationElement) {
+        durationElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }
     }
 
     function finishWorkout() {
@@ -2382,10 +3162,23 @@
           // Restaurar valores dos inputs
           if (exercise.sets) {
             exercise.sets.forEach((set, setIndex) => {
-              const weightInput = document.getElementById(`weight-${index}-${setIndex + 1}`);
-              const repsInput = document.getElementById(`reps-${index}-${setIndex + 1}`);
+              const setId = `${index}-${setIndex + 1}`;
+              const weightInput = document.getElementById(`weight-${setId}`);
+              const repsInput = document.getElementById(`reps-${setId}`);
               if (weightInput) weightInput.value = set.weight;
               if (repsInput) repsInput.value = set.reps;
+              
+              // Atualizar status visual
+              updateSetStatus(setId);
+              
+              // Marcar como completada se necessário
+              const setCard = document.getElementById(`set-card-${setId}`);
+              const statusElement = document.getElementById(`status-${setId}`);
+              if (setCard && statusElement) {
+                setCard.classList.add('completed');
+                statusElement.textContent = 'Concluída';
+                statusElement.className = 'set-status completed';
+              }
             });
           }
         }

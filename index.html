@@ -68,7 +68,9 @@
       font-size: 1.6em;
       font-weight: 700;
       background: var(--gradient-main);
+      background-clip: text;
       -webkit-background-clip: text;
+      color: transparent;
       -webkit-text-fill-color: transparent;
     }
     .profile-info {
@@ -116,7 +118,9 @@
       font-size: 1.7em;
       font-weight: 700;
       background: var(--gradient-main);
+      background-clip: text;
       -webkit-background-clip: text;
+      color: transparent;
       -webkit-text-fill-color: transparent;
       margin-bottom: 4px;
     }
@@ -478,7 +482,9 @@
       font-size: 2.3em;
       font-weight: 700;
       background: var(--gradient-main);
+      background-clip: text;
       -webkit-background-clip: text;
+      color: transparent;
       -webkit-text-fill-color: transparent;
     }
     .progress-bar {
@@ -643,9 +649,200 @@
       z-index: 1000;
       transform: translateX(400px);
       transition: transform 0.3s ease;
+      max-width: 320px;
+      white-space: pre-line;
     }
     .notification.show {
       transform: translateX(0);
+    }
+
+    /* Modal de Sumário do Treino */
+    .workout-summary-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .workout-summary-modal.show {
+      opacity: 1;
+    }
+    .modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      max-width: 450px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .modal-header {
+      padding: 25px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      background: var(--gradient-main);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .modal-close:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+    .modal-body {
+      padding: 25px;
+    }
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .summary-stat {
+      text-align: center;
+      padding: 20px;
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+    .stat-icon {
+      font-size: 2em;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 1.8em;
+      font-weight: 700;
+      background: var(--gradient-main);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: 0.85em;
+      color: var(--text-muted);
+    }
+    .rating-section {
+      text-align: center;
+    }
+    .rating-section h3 {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+    .rating-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .rating-btn {
+      padding: 15px 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .rating-btn:hover {
+      background: var(--gradient-main);
+      color: white;
+      border-color: var(--color-primary);
+      transform: scale(1.02);
+    }
+
+    /* Melhorias Estéticas */
+    .workout-card:hover .workout-emoji {
+      animation: bounce 0.6s ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 20%, 60%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      80% { transform: translateY(-5px); }
+    }
+
+    .exercise-item:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 5px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .timer-display:hover {
+      text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+
+    /* Indicadores de Progresso */
+    .progress-indicator {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: var(--gradient-main);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: 600;
+    }
+
+    /* Estado de carregamento */
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--color-primary);
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
     /* Barra inferior de navegação */
@@ -689,22 +886,240 @@
       box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
     }
 
-    /* Responsivo */
-    @media (max-width: 640px) {
-      .quick-stats {
-        grid-template-columns: repeat(2,1fr);
+    /* Animações */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    .slide-up {
+      animation: slideUp 0.3s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsivo Melhorado */
+    @media (max-width: 768px) {
+      .app-header {
+        padding: 15px;
       }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      
+      .app-title {
+        font-size: 1.4em;
+      }
+      
+      .profile-info {
+        justify-content: center;
+      }
+      
+      .quick-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 15px;
+      }
+      
+      .stat-card {
+        padding: 12px 8px;
+      }
+      
+      .stat-number {
+        font-size: 1.4em;
+      }
+      
+      .nav-tabs {
+        padding: 0 15px 15px;
+        gap: 8px;
+      }
+      
+      .nav-tab {
+        padding: 10px 16px;
+        font-size: 0.9em;
+      }
+      
+      .tab-content {
+        padding: 0 15px 15px;
+      }
+      
       .workout-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
+      
+      .workout-card {
+        padding: 20px 16px;
+      }
+      
+      .workout-emoji {
+        font-size: 2em;
+      }
+      
       .stats-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
       }
+      
+      .stats-card, .exercise-section {
+        padding: 20px;
+      }
+      
+      .timer-section {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+      }
+      
       .timer-display {
-        font-size: 2.4em;
+        font-size: 2.5em;
+        margin-bottom: 15px;
       }
+      
       .timer-controls {
         flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .timer-btn {
+        flex: 1;
+        min-width: 100px;
+        padding: 10px 16px;
+        font-size: 0.9em;
+      }
+      
+      .timer-presets {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      
+      .preset-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+      }
+      
+      .exercise-header {
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .exercise-meta {
+        gap: 10px;
+      }
+      
+      .exercise-check {
+        align-self: flex-end;
+        margin-top: -30px;
+      }
+      
+      .sets-tracker {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .set-input {
+        padding: 12px;
+      }
+      
+      .input-group {
+        gap: 8px;
+      }
+      
+      .input-field {
+        padding: 8px;
+        font-size: 0.85em;
+      }
+      
+      .bottom-nav {
+        padding: 10px 15px;
+        gap: 8px;
+      }
+      
+      .nav-button {
+        padding: 12px 16px;
+        font-size: 0.9em;
+      }
+      
+      .notification {
+        top: 15px;
+        right: 15px;
+        left: 15px;
+        padding: 12px 16px;
+        font-size: 0.9em;
+        text-align: center;
+      }
+      
+      .config-card {
+        padding: 15px;
+      }
+      
+      .goal-card {
+        padding: 15px;
+      }
+      
+      .history-item {
+        padding: 12px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .quick-stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      
+      .timer-display {
+        font-size: 2.2em;
+      }
+      
+      .timer-btn {
+        min-width: 80px;
+        padding: 8px 12px;
+        font-size: 0.85em;
+      }
+      
+      .workout-title {
+        font-size: 1em;
+      }
+      
+      .section-title {
+        font-size: 1.1em;
+      }
+    }
+    
+    @media (orientation: landscape) and (max-height: 600px) {
+      .app-header {
+        padding: 10px 20px;
+      }
+      
+      .quick-stats {
+        padding: 10px 20px;
+      }
+      
+      .timer-section {
+        padding: 20px;
+      }
+      
+      .timer-display {
+        font-size: 2em;
+        margin-bottom: 10px;
       }
     }
   </style>
@@ -932,7 +1347,7 @@
   <!-- Aba: Configurações -->
   <div id="config" class="tab-content">
     <div class="config-card">
-      <h3>Perfil</h3>
+      <h3>👤 Perfil</h3>
       <label for="inputName">Nome</label>
       <input type="text" id="inputName" placeholder="Digite seu nome" />
       <label for="inputCurrentWeight">Peso Atual (kg)</label>
@@ -940,33 +1355,52 @@
       <label for="inputWeightGoal">Meta de Peso (kg)</label>
       <input type="number" id="inputWeightGoal" min="0" step="0.1" />
       <div class="config-actions">
-        <button class="config-btn primary" onclick="saveProfile()">Salvar Perfil</button>
-        <button class="config-btn secondary" onclick="resetProfile()">Redefinir</button>
+        <button class="config-btn primary" onclick="saveProfile()">💾 Salvar Perfil</button>
+        <button class="config-btn secondary" onclick="resetProfile()">🔄 Redefinir</button>
       </div>
     </div>
     <div class="config-card">
-      <h3>Metas Semanais</h3>
+      <h3>🎯 Metas Semanais</h3>
       <label for="inputWeeklyWorkouts">Treinos por Semana</label>
       <input type="number" id="inputWeeklyWorkouts" min="1" max="14" />
       <label for="inputWeeklyVolume">Volume Total (séries)</label>
       <input type="number" id="inputWeeklyVolume" min="0" />
       <div class="config-actions">
-        <button class="config-btn primary" onclick="saveGoals()">Salvar Metas</button>
-        <button class="config-btn secondary" onclick="resetGoals()">Redefinir</button>
+        <button class="config-btn primary" onclick="saveGoals()">🎯 Salvar Metas</button>
+        <button class="config-btn secondary" onclick="resetGoals()">🔄 Redefinir</button>
       </div>
     </div>
     <div class="config-card">
-      <h3>Exportar & Importar Dados</h3>
+      <h3>📊 Análise Avançada</h3>
       <div class="config-actions">
-        <button class="config-btn primary" onclick="exportData()">Exportar Backup</button>
-        <button class="config-btn secondary" onclick="document.getElementById('importFile').click()">Importar</button>
+        <button class="config-btn primary" onclick="showAdvancedStats()">📈 Estatísticas Detalhadas</button>
+        <button class="config-btn secondary" onclick="recalculateStats()">🔄 Recalcular Dados</button>
+      </div>
+    </div>
+    <div class="config-card">
+      <h3>📁 Backup & Dados</h3>
+      <div class="config-actions">
+        <button class="config-btn primary" onclick="exportData()">📤 Exportar Backup</button>
+        <button class="config-btn secondary" onclick="document.getElementById('importFile').click()">📥 Importar</button>
         <input type="file" id="importFile" accept="application/json" style="display:none" />
       </div>
     </div>
     <div class="config-card">
-      <h3>Dados</h3>
+      <h3>⚠️ Zona de Risco</h3>
       <div class="config-actions">
-        <button class="config-btn secondary" onclick="clearAllData()">Limpar Todos os Dados</button>
+        <button class="config-btn secondary" onclick="clearAllData()">🗑️ Limpar Todos os Dados</button>
+      </div>
+    </div>
+    <div class="config-card">
+      <h3>ℹ️ Sobre o App</h3>
+      <p style="color: var(--text-muted); font-size: 0.9em; line-height: 1.5; margin-bottom: 15px;">
+        💪 <strong>Treino ABC Pro</strong><br>
+        Versão 2.0 - Aplicativo avançado de treino pessoal com registro de cargas, cronômetro inteligente e análise completa de progresso.
+      </p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <span style="background: var(--bg-tertiary); padding: 4px 8px; border-radius: 8px; font-size: 0.8em;">✅ Offline</span>
+        <span style="background: var(--bg-tertiary); padding: 4px 8px; border-radius: 8px; font-size: 0.8em;">📱 Responsivo</span>
+        <span style="background: var(--bg-tertiary); padding: 4px 8px; border-radius: 8px; font-size: 0.8em;">💾 Auto-save</span>
       </div>
     </div>
   </div>
@@ -1062,6 +1496,15 @@
       const importInput = document.getElementById('importFile');
       importInput.addEventListener('change', handleImportData);
 
+      // Inicializar cronômetro
+      updateTimerButtons();
+      
+      // Verificar dados perdidos e recuperar
+      checkDataIntegrity();
+      
+      // Verificar auto-save
+      checkAutosave();
+
       // Service worker registration somente se protocolo suportar
       if ('serviceWorker' in navigator) {
         const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
@@ -1073,53 +1516,170 @@
           });
         }
       }
+      
+      // Auto-save periodicamente
+      setInterval(autoSave, 30000); // A cada 30 segundos
+      
+      // Motivational message no início
+      setTimeout(() => {
+        showNotification(getMotivationalMessage());
+      }, 2000);
     });
 
     // ====================== FUNÇÕES DE ARMAZENAMENTO ======================
     function initializeStorage() {
-      if (!getStoredData('history')) {
-        saveData('history', []);
+      // Verifica se localStorage está disponível
+      if (!isLocalStorageAvailable()) {
+        showNotification('⚠️ Armazenamento local não disponível. Dados não serão salvos.');
+        return false;
       }
-      if (!getStoredData('stats')) {
-        saveData('stats', {
-          totalWorkouts: 0,
-          weeklyWorkouts: 0,
-          currentStreak: 0,
-          muscleVolume: {
-            back: 0, biceps: 0, chest: 0, shoulders: 0, triceps: 0,
-            quads: 0, hamstrings: 0, calves: 0, traps: 0
-          }
-        });
+
+      try {
+        if (!getStoredData('history')) {
+          saveData('history', []);
+        }
+        if (!getStoredData('stats')) {
+          saveData('stats', {
+            totalWorkouts: 0,
+            weeklyWorkouts: 0,
+            currentStreak: 0,
+            lastWorkoutDate: null,
+            muscleVolume: {
+              back: 0, biceps: 0, chest: 0, shoulders: 0, triceps: 0,
+              quads: 0, hamstrings: 0, calves: 0, traps: 0
+            },
+            weeklyReset: new Date().toISOString()
+          });
+        }
+        if (!getStoredData('records')) {
+          saveData('records', { inclinePress: 0, pullUps: 0, squat: 0 });
+        }
+        if (!getStoredData('settings')) {
+          saveData('settings', {
+            userName: 'Usuário',
+            currentWeight: 75,
+            weightGoal: 90,
+            weeklyWorkoutsTarget: 6,
+            weeklyVolumeTarget: 88,
+            lastSync: new Date().toISOString()
+          });
+        }
+        
+        // Verificação de integridade dos dados
+        validateStoredData();
+        return true;
+      } catch (error) {
+        console.error('Erro ao inicializar armazenamento:', error);
+        showNotification('❌ Erro ao inicializar dados. Tentando recuperar...');
+        return false;
       }
-      if (!getStoredData('records')) {
-        saveData('records', { inclinePress: 0, pullUps: 0, squat: 0 });
+    }
+
+    function isLocalStorageAvailable() {
+      try {
+        const testKey = '__localStorage_test__';
+        localStorage.setItem(testKey, 'test');
+        localStorage.removeItem(testKey);
+        return true;
+      } catch (e) {
+        return false;
       }
-      if (!getStoredData('settings')) {
-        // Valores padrão para configurações
-        saveData('settings', {
-          userName: 'Usuário',
-          currentWeight: 75,
-          weightGoal: 90,
-          weeklyWorkoutsTarget: 6,
-          weeklyVolumeTarget: 88
-        });
+    }
+
+    function validateStoredData() {
+      const requiredKeys = ['history', 'stats', 'records', 'settings'];
+      let hasErrors = false;
+      
+      requiredKeys.forEach(key => {
+        const data = getStoredData(key);
+        if (!data) {
+          console.warn(`Dados corrompidos detectados para: ${key}`);
+          hasErrors = true;
+        }
+      });
+      
+      if (hasErrors) {
+        showNotification('⚠️ Alguns dados foram corrompidos e foram restaurados.');
       }
     }
 
     function getStoredData(key) {
       try {
-        return JSON.parse(localStorage.getItem(storageKeys[key]));
+        const item = localStorage.getItem(storageKeys[key]);
+        if (item === null) return null;
+        
+        const parsed = JSON.parse(item);
+        
+        // Validação específica por tipo de dado
+        if (key === 'history' && !Array.isArray(parsed)) return [];
+        if (key === 'stats' && typeof parsed !== 'object') return null;
+        if (key === 'records' && typeof parsed !== 'object') return null;
+        if (key === 'settings' && typeof parsed !== 'object') return null;
+        
+        return parsed;
       } catch (e) {
+        console.error(`Erro ao carregar dados ${key}:`, e);
+        showNotification(`⚠️ Erro ao carregar ${key}. Usando valores padrão.`);
         return null;
       }
     }
+    
     function saveData(key, data) {
       try {
-        localStorage.setItem(storageKeys[key], JSON.stringify(data));
+        // Validação dos dados antes de salvar
+        if (data === undefined || data === null) {
+          console.warn(`Tentativa de salvar dados inválidos para ${key}`);
+          return false;
+        }
+        
+        const stringified = JSON.stringify(data);
+        
+        // Verifica tamanho do localStorage (limite ~5MB na maioria dos browsers)
+        if (stringified.length > 4 * 1024 * 1024) {
+          showNotification('⚠️ Dados muito grandes. Considerando limpeza do histórico antigo.');
+        }
+        
+        localStorage.setItem(storageKeys[key], stringified);
+        
+        // Atualiza timestamp de última modificação
+        const settings = getStoredData('settings') || {};
+        settings.lastSync = new Date().toISOString();
+        if (key !== 'settings') {
+          localStorage.setItem(storageKeys.settings, JSON.stringify(settings));
+        }
+        
         return true;
       } catch (e) {
         console.error('Erro ao salvar dados:', e);
+        
+        if (e.name === 'QuotaExceededError') {
+          showNotification('💾 Armazenamento cheio! Liberando espaço...');
+          cleanOldData();
+          // Tenta salvar novamente após limpeza
+          try {
+            localStorage.setItem(storageKeys[key], JSON.stringify(data));
+            return true;
+          } catch (e2) {
+            showNotification('❌ Não foi possível salvar. Armazenamento limitado.');
+          }
+        } else {
+          showNotification('❌ Erro ao salvar dados.');
+        }
         return false;
+      }
+    }
+    
+    function cleanOldData() {
+      try {
+        const history = getStoredData('history') || [];
+        if (history.length > 100) {
+          // Mantém apenas os 100 treinos mais recentes
+          const recentHistory = history.slice(0, 100);
+          saveData('history', recentHistory);
+          showNotification('🧹 Histórico antigo removido para liberar espaço.');
+        }
+      } catch (e) {
+        console.error('Erro ao limpar dados antigos:', e);
       }
     }
 
@@ -1282,39 +1842,90 @@
         showNotification('Nenhum treino ativo!');
         return;
       }
+      
       const endTime = new Date();
       const duration = Math.round((endTime - currentWorkoutData.startTime) / 1000 / 60);
       const completedExercises = currentWorkoutData.exercises.filter(ex => ex && ex.completed).length;
       const totalSets = currentWorkoutData.exercises.reduce((acc, ex) => acc + (ex && ex.sets ? ex.sets.length : 0), 0);
+      const totalWeight = currentWorkoutData.exercises.reduce((acc, ex) => {
+        if (ex && ex.sets) {
+          return acc + ex.sets.reduce((setAcc, set) => setAcc + (set.weight * set.reps), 0);
+        }
+        return acc;
+      }, 0);
+      
       const workoutRecord = {
         id: Date.now(),
         type: currentWorkoutType,
         name: workoutTemplates[currentWorkoutType].name,
-        date: currentWorkoutData.startTime,
+        date: currentWorkoutData.startTime.toISOString(),
+        endDate: endTime.toISOString(),
         duration: duration,
         exercises: currentWorkoutData.exercises,
         completedExercises: completedExercises,
         totalExercises: workoutTemplates[currentWorkoutType].exercises.length,
         totalSets: totalSets,
-        completed: true
+        totalWeight: totalWeight,
+        completed: true,
+        rating: null, // Para avaliação futura
+        notes: '' // Para anotações
       };
+      
+      // Salva o treino
       const history = getStoredData('history') || [];
       history.unshift(workoutRecord);
-      saveData('history', history);
+      
+      // Limita histórico para evitar armazenamento excessivo
+      if (history.length > 200) {
+        history.splice(200);
+      }
+      
+      if (!saveData('history', history)) {
+        showNotification('⚠️ Erro ao salvar treino. Tentando novamente...');
+        // Retry once
+        setTimeout(() => {
+          if (saveData('history', history)) {
+            showNotification('✅ Treino salvo com sucesso!');
+          } else {
+            showNotification('❌ Falha ao salvar. Verifique o armazenamento.');
+          }
+        }, 1000);
+      }
+      
       updateStatsAfterWorkout(workoutRecord);
       updatePersonalRecords(workoutRecord);
+      
+      // Reset workout state
       currentWorkoutData = {};
       currentWorkoutType = null;
       sessionStartTime = null;
       stopSessionTimer();
       resetTimer();
+      
+      // Update UI
       document.getElementById('activeWorkout').style.display = 'none';
       document.getElementById('finishBtn').style.display = 'none';
       document.getElementById('homeBtn').style.display = 'block';
       document.querySelectorAll('.workout-card').forEach(card => card.classList.remove('active'));
+      
+      // Update stats
       updateQuickStats();
       loadStatistics();
-      showNotification(`Treino ${workoutRecord.type} finalizado! 🎉\n⏱️ ${duration} min | 💪 ${completedExercises} exercícios`);
+      
+      // Success notification with summary
+      const summary = `
+        ⏱️ ${duration} min
+        💪 ${completedExercises}/${workoutTemplates[currentWorkoutType].exercises.length} exercícios
+        🏋️ ${totalSets} séries
+        ${totalWeight > 0 ? `⚖️ ${totalWeight.toFixed(1)}kg volume` : ''}
+      `;
+      
+      showNotification(`🎉 Treino ${workoutRecord.type} finalizado!${summary}`);
+      
+      // Show workout summary modal (opcional)
+      setTimeout(() => {
+        showWorkoutSummary(workoutRecord);
+      }, 1000);
     }
 
     function updateStatsAfterWorkout(workout) {
@@ -1668,6 +2279,307 @@
       const weeklyCount = getWeeklyWorkoutsCount();
       const target = getStoredData('settings').weeklyWorkoutsTarget;
       return Math.round((weeklyCount / target) * 100);
+    }
+    
+    // ====================== NOVAS FUNCIONALIDADES ======================
+    
+    function checkDataIntegrity() {
+      try {
+        const history = getStoredData('history') || [];
+        const stats = getStoredData('stats') || {};
+        
+        // Verifica se há inconsistências nos dados
+        if (history.length !== stats.totalWorkouts && stats.totalWorkouts > 0) {
+          console.warn('Inconsistência detectada nos dados. Recalculando...');
+          recalculateStats();
+        }
+      } catch (e) {
+        console.error('Erro na verificação de integridade:', e);
+      }
+    }
+    
+    function recalculateStats() {
+      const history = getStoredData('history') || [];
+      const muscleVolume = {
+        back: 0, biceps: 0, chest: 0, shoulders: 0, triceps: 0,
+        quads: 0, hamstrings: 0, calves: 0, traps: 0
+      };
+      
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      
+      history.forEach(workout => {
+        if (workout.exercises && Array.isArray(workout.exercises)) {
+          workout.exercises.forEach(exercise => {
+            if (exercise && exercise.completed && exercise.muscle && exercise.sets) {
+              const workoutDate = new Date(workout.date);
+              if (workoutDate >= oneWeekAgo) {
+                muscleVolume[exercise.muscle] = (muscleVolume[exercise.muscle] || 0) + exercise.sets.length;
+              }
+            }
+          });
+        }
+      });
+      
+      const stats = {
+        totalWorkouts: history.length,
+        weeklyWorkouts: getWeeklyWorkoutsCount(),
+        currentStreak: calculateCurrentStreak(),
+        lastWorkoutDate: history.length > 0 ? history[0].date : null,
+        muscleVolume: muscleVolume,
+        weeklyReset: new Date().toISOString()
+      };
+      
+      saveData('stats', stats);
+      showNotification('📊 Estatísticas recalculadas!');
+    }
+    
+    function autoSave() {
+      if (currentWorkoutData && currentWorkoutType) {
+        // Salva o progresso atual do treino
+        const autosaveData = {
+          type: currentWorkoutType,
+          data: currentWorkoutData,
+          timestamp: Date.now()
+        };
+        
+        try {
+          localStorage.setItem('treinoABC_autosave', JSON.stringify(autosaveData));
+        } catch (e) {
+          console.warn('Falha no auto-save:', e);
+        }
+      }
+    }
+    
+    function checkAutosave() {
+      try {
+        const autosave = JSON.parse(localStorage.getItem('treinoABC_autosave'));
+        if (autosave && Date.now() - autosave.timestamp < 3600000) { // 1 hora
+          if (confirm('Treino anterior encontrado. Deseja continuar de onde parou?')) {
+            currentWorkoutType = autosave.type;
+            currentWorkoutData = autosave.data;
+            startWorkout(autosave.type);
+            restoreWorkoutProgress();
+          }
+        }
+      } catch (e) {
+        console.warn('Erro ao verificar auto-save:', e);
+      }
+    }
+    
+    function restoreWorkoutProgress() {
+      if (!currentWorkoutData || !currentWorkoutData.exercises) return;
+      
+      currentWorkoutData.exercises.forEach((exercise, index) => {
+        if (exercise && exercise.completed) {
+          const item = document.querySelector(`[data-exercise="${index}"]`);
+          const check = item.querySelector('.exercise-check');
+          if (item && check) {
+            item.classList.add('completed');
+            check.classList.add('checked');
+          }
+          
+          // Restaurar valores dos inputs
+          if (exercise.sets) {
+            exercise.sets.forEach((set, setIndex) => {
+              const weightInput = document.getElementById(`weight-${index}-${setIndex + 1}`);
+              const repsInput = document.getElementById(`reps-${index}-${setIndex + 1}`);
+              if (weightInput) weightInput.value = set.weight;
+              if (repsInput) repsInput.value = set.reps;
+            });
+          }
+        }
+      });
+      
+      updateWorkoutProgress();
+      updateSessionStats();
+    }
+    
+    function showWorkoutSummary(workout) {
+      const modal = document.createElement('div');
+      modal.className = 'workout-summary-modal';
+      modal.innerHTML = `
+        <div class="modal-backdrop" onclick="closeModal(this)"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>🎉 Treino Concluído!</h2>
+            <button onclick="closeModal(this)" class="modal-close">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="summary-stats">
+              <div class="summary-stat">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-value">${workout.duration} min</div>
+                <div class="stat-label">Duração</div>
+              </div>
+              <div class="summary-stat">
+                <div class="stat-icon">💪</div>
+                <div class="stat-value">${workout.completedExercises}</div>
+                <div class="stat-label">Exercícios</div>
+              </div>
+              <div class="summary-stat">
+                <div class="stat-icon">🏋️</div>
+                <div class="stat-value">${workout.totalSets}</div>
+                <div class="stat-label">Séries</div>
+              </div>
+              ${workout.totalWeight > 0 ? `
+                <div class="summary-stat">
+                  <div class="stat-icon">⚖️</div>
+                  <div class="stat-value">${workout.totalWeight.toFixed(0)}kg</div>
+                  <div class="stat-label">Volume</div>
+                </div>
+              ` : ''}
+            </div>
+            <div class="rating-section">
+              <h3>Como foi o treino?</h3>
+              <div class="rating-buttons">
+                <button onclick="rateWorkout(${workout.id}, 1)" class="rating-btn">😴 Fácil</button>
+                <button onclick="rateWorkout(${workout.id}, 2)" class="rating-btn">😊 Bom</button>
+                <button onclick="rateWorkout(${workout.id}, 3)" class="rating-btn">💪 Intenso</button>
+                <button onclick="rateWorkout(${workout.id}, 4)" class="rating-btn">🔥 Brutal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      setTimeout(() => modal.classList.add('show'), 100);
+    }
+    
+    function closeModal(element) {
+      const modal = element.closest('.workout-summary-modal');
+      modal.classList.remove('show');
+      setTimeout(() => document.body.removeChild(modal), 300);
+    }
+    
+    function rateWorkout(workoutId, rating) {
+      const history = getStoredData('history') || [];
+      const workout = history.find(w => w.id === workoutId);
+      if (workout) {
+        workout.rating = rating;
+        saveData('history', history);
+        showNotification('⭐ Avaliação salva!');
+      }
+      closeModal(document.querySelector('.workout-summary-modal'));
+    }
+    
+    function getMotivationalMessage() {
+      const messages = [
+        "💪 Você está ficando mais forte!",
+        "🔥 Mantenha o foco!",
+        "⚡ Energia e determinação!",
+        "🎯 Rumo aos seus objetivos!",
+        "🌟 Cada rep conta!",
+        "🚀 Evoluindo sempre!",
+        "💯 Dando o máximo!",
+        "⭐ Você é incrível!"
+      ];
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+    
+    function addProgressPhotos() {
+      // Funcionalidade para adicionar fotos de progresso (futura implementação)
+      showNotification('📸 Funcionalidade de fotos em desenvolvimento!');
+    }
+    
+    function exportWorkoutPDF() {
+      // Funcionalidade para exportar treino em PDF (futura implementação)
+      showNotification('📄 Export PDF em desenvolvimento!');
+    }
+    
+    function showAdvancedStats() {
+      const history = getStoredData('history') || [];
+      const stats = getStoredData('stats') || {};
+      
+      if (history.length === 0) {
+        showNotification('📊 Sem dados suficientes para análise avançada.');
+        return;
+      }
+      
+      // Calcular estatísticas avançadas
+      const totalDuration = history.reduce((acc, w) => acc + (w.duration || 0), 0);
+      const avgDuration = Math.round(totalDuration / history.length);
+      const avgCompletion = Math.round(history.reduce((acc, w) => acc + (w.completedExercises / w.totalExercises * 100), 0) / history.length);
+      const favoriteWorkout = getFavoriteWorkout(history);
+      const bestStreak = calculateBestStreak(history);
+      const totalWeight = history.reduce((acc, w) => acc + (w.totalWeight || 0), 0);
+      
+      const modal = document.createElement('div');
+      modal.className = 'workout-summary-modal';
+      modal.innerHTML = `
+        <div class="modal-backdrop" onclick="closeModal(this)"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>📊 Análise Avançada</h2>
+            <button onclick="closeModal(this)" class="modal-close">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="summary-stats">
+              <div class="summary-stat">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-value">${avgDuration} min</div>
+                <div class="stat-label">Duração Média</div>
+              </div>
+              <div class="summary-stat">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value">${avgCompletion}%</div>
+                <div class="stat-label">Taxa Conclusão</div>
+              </div>
+              <div class="summary-stat">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-value">${bestStreak}</div>
+                <div class="stat-label">Melhor Sequência</div>
+              </div>
+              <div class="summary-stat">
+                <div class="stat-icon">⚖️</div>
+                <div class="stat-value">${Math.round(totalWeight)}kg</div>
+                <div class="stat-label">Volume Total</div>
+              </div>
+            </div>
+            <div style="text-align: center; padding: 20px; background: var(--bg-tertiary); border-radius: 12px;">
+              <h4 style="color: var(--text-primary); margin-bottom: 10px;">💪 Treino Favorito</h4>
+              <div style="font-size: 1.2em; color: var(--color-primary);">${favoriteWorkout}</div>
+              <div style="font-size: 0.9em; color: var(--text-muted); margin-top: 5px;">Mais realizado</div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      setTimeout(() => modal.classList.add('show'), 100);
+    }
+    
+    function getFavoriteWorkout(history) {
+      const counts = {};
+      history.forEach(w => {
+        counts[w.type] = (counts[w.type] || 0) + 1;
+      });
+      const favorite = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+      return `Treino ${favorite}`;
+    }
+    
+    function calculateBestStreak(history) {
+      if (!history.length) return 0;
+      
+      const sortedDates = history.map(w => new Date(w.date).toDateString()).sort();
+      let currentStreak = 1;
+      let bestStreak = 1;
+      
+      for (let i = 1; i < sortedDates.length; i++) {
+        const prevDate = new Date(sortedDates[i-1]);
+        const currentDate = new Date(sortedDates[i]);
+        const diffDays = Math.floor((currentDate - prevDate) / (1000 * 60 * 60 * 24));
+        
+        if (diffDays <= 2) { // Permite um dia de descanso
+          currentStreak++;
+          bestStreak = Math.max(bestStreak, currentStreak);
+        } else {
+          currentStreak = 1;
+        }
+      }
+      
+      return bestStreak;
     }
   </script>
 </body>
